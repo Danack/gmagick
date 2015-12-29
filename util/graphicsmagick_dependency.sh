@@ -19,9 +19,9 @@ graphicsmagick_fetch_and_build () {
         dev)
             ;;
         *)
-    # Both individual commits, and tagged versions are cacheable
-        if [ -d "${im_dir}" ]; then
-            echo "Using cached directory ${im_dir}"
+        # Both individual commits, and tagged versions are cacheable
+        if [ -d "${gm_dir}" ]; then
+            echo "Using cached directory ${gm_dir}"
             return  
         fi
         ;;

@@ -17,7 +17,7 @@ if test $PHP_GMAGICK != "no"; then
 		AC_MSG_RESULT(found in $WAND_BINARY)
 		
 		AC_MSG_CHECKING(GraphicsMagick version)
-		WAND_DIR=`$WAND_BINARY --prefix`
+		
 
 		GRAPHICSMAGICK_VERSION_ORIG=`$WAND_BINARY --version`
 		GRAPHICSMAGICK_VERSION_MASK=`echo ${GRAPHICSMAGICK_VERSION_ORIG} | awk 'BEGIN { FS = "."; } { printf "%d", ($1 * 1000 + $2) * 1000 + $3;}'`
@@ -28,8 +28,12 @@ if test $PHP_GMAGICK != "no"; then
 			AC_MSG_ERROR(no. You need at least GraphicsMagick version 1.1.0 to use Gmagick.)
 		fi
 
-		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagick, "$WAND_DIR/", GMAGICK_SHARED_LIBADD)
-		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagickWand, "$WAND_DIR/", GMAGICK_SHARED_LIBADD)
+		AC_MSG_CHECKING(GraphicsMagick library directory)
+		WAND_DIR=`$WAND_BINARY --prefix`
+		AC_MSG_RESULT(found version $WAND_DIR)
+
+		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagick, "$WAND_DIR/lib", GMAGICK_SHARED_LIBADD)
+		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagickWand, "$WAND_DIR/lib", GMAGICK_SHARED_LIBADD)
 		PHP_ADD_INCLUDE($WAND_DIR/include/GraphicsMagick)
 
 		PHP_NEW_EXTENSION(gmagick, gmagick_helpers.c gmagick_methods.c gmagick.c gmagickdraw_methods.c gmagickpixel_methods.c,  $ext_shared)
