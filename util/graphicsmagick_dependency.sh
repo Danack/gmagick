@@ -70,7 +70,7 @@ set +e
     --prefix="${HOME}/gm/graphicsmagick-${version}" \
     --with-quantum-depth=16 \
     --enable-shared \
-    --exec-prefix="${HOME}/gm" \
+    --exec-prefix="${HOME}/gm/graphicsmagick-${version}" \
     --disable-openmp \
     --with-perl=no \
     --without-threads \
