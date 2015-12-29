@@ -1,7 +1,9 @@
 #!/bin/sh
 
-#give an error if the download fails.
+# Give an error if the download fails.
 set -e
+# Echo all commands
+set -x
 
 graphicsmagick_fetch_and_build () {
     local version=$1
@@ -68,7 +70,7 @@ set +e
     --prefix="${HOME}/gm/graphicsmagick-${version}" \
     --with-quantum-depth=16 \
     --enable-shared \
-    --exec-prefix=/usr \
+    --exec-prefix="${HOME}/gm" \
     --disable-openmp \
     --with-perl=no \
     --without-threads \
