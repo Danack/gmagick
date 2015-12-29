@@ -38,7 +38,7 @@ script:
     - export SKIP_SLOW_TESTS=1
     - export TEST_PHP_EXECUTABLE=`which php`
     - export PHP_IMAGICK_VERSION=$(php -r '$sxe = simplexml_load_file ("package.xml"); echo (string) $sxe->version->release;')
-    - . ./util/configure-cflags.sh
+    - . ./util/configure_cflags.sh
     - phpize
     - ./configure --with-gmagick="${HOME}/gm/graphicsmagick-${GRAPHICSMAGICK_VERSION}"
     - make
