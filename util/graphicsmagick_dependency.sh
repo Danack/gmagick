@@ -54,7 +54,8 @@ graphicsmagick_fetch_and_build () {
         #else
         
         
-           wget http://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/${version}/GraphicsMagick-${version}.tar.gz/download
+           wget -O GraphicsMagick-${version}.tar.gz http://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/${version}/GraphicsMagick-${version}.tar.gz/download
+           ls -l
            tar xvfz GraphicsMagick-${version}.tar.gz
            cd GraphicsMagick-*
         #fi
