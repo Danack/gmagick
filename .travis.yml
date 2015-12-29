@@ -12,16 +12,15 @@ php:
     
 
 env:
-  global:
-    - GRAPHICSMAGICK_VERSION=dev
-    - GRAPHICSMAGICK_VERSION=1.3.23
-    - GRAPHICSMAGICK_VERSION=1.3.22
-    - GRAPHICSMAGICK_VERSION=1.3.19
-    - GRAPHICSMAGICK_VERSION=1.3.17
-    # For Github, you can include individual commits like this:
-    # - GRAPHICSMAGICK_VERSION=commit_25553302a6d5f736b55e60109600dfbce5fbea48
-    # not implemented for mercurial yet.
-    
+  - GRAPHICSMAGICK_VERSION=dev
+  - GRAPHICSMAGICK_VERSION=1.3.23
+  - GRAPHICSMAGICK_VERSION=1.3.22
+  - GRAPHICSMAGICK_VERSION=1.3.19
+  - GRAPHICSMAGICK_VERSION=1.3.17
+  # For Github, you can include individual commits like this:
+  # - GRAPHICSMAGICK_VERSION=commit_25553302a6d5f736b55e60109600dfbce5fbea48
+  # not implemented for mercurial yet.
+
   matrix:
     - QUANTUM=8
     - QUANTUM=16    
