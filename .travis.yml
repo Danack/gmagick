@@ -42,7 +42,8 @@ script:
 #    - export PHP_IMAGICK_VERSION=$(php -r '$sxe = simplexml_load_file ("package.xml"); echo (string) $sxe->version->release;')
 #    - . ./configure-cflags.sh
     - phpize
-    - ./configure --with-gmagick=${HOME}/gm/graphicsmagick-${GRAPHICSMAGICK_VERSION}
+    - ls -lR "${HOME}/gm/graphicsmagick-${GRAPHICSMAGICK_VERSION}"
+    - ./configure --with-gmagick="${HOME}/gm/graphicsmagick-${GRAPHICSMAGICK_VERSION}"
     - make
     - php run-tests.php -d extension=gmagick.so -d extension_dir=modules -n ./*.phpt
     - php run-tests.php -d extension=gmagick.so -d extension_dir=modules -n ./tests/*.phpt
