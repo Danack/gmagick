@@ -30,7 +30,7 @@ if test $PHP_GMAGICK != "no"; then
 
 		AC_MSG_CHECKING(GraphicsMagick library directory)
 		WAND_DIR=`$WAND_BINARY --prefix`
-		AC_MSG_RESULT(found version $WAND_DIR)
+		AC_MSG_RESULT(found library directory $WAND_DIR)
 
 		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagick, "$WAND_DIR/lib", GMAGICK_SHARED_LIBADD)
 		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagickWand, "$WAND_DIR/lib", GMAGICK_SHARED_LIBADD)
