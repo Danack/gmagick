@@ -28,8 +28,8 @@ if test $PHP_GMAGICK != "no"; then
 			AC_MSG_ERROR(no. You need at least GraphicsMagick version 1.1.0 to use Gmagick.)
 		fi
 
-		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagick, $WAND_DIR/lib, GMAGICK_SHARED_LIBADD)
-		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagickWand, $WAND_DIR/lib, GMAGICK_SHARED_LIBADD)
+		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagick, "$WAND_DIR/", GMAGICK_SHARED_LIBADD)
+		PHP_ADD_LIBRARY_WITH_PATH(GraphicsMagickWand, "$WAND_DIR/", GMAGICK_SHARED_LIBADD)
 		PHP_ADD_INCLUDE($WAND_DIR/include/GraphicsMagick)
 
 		PHP_NEW_EXTENSION(gmagick, gmagick_helpers.c gmagick_methods.c gmagick.c gmagickdraw_methods.c gmagickpixel_methods.c,  $ext_shared)
