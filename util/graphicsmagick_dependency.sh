@@ -55,8 +55,7 @@ graphicsmagick_fetch_and_build () {
         
         
            wget -O GraphicsMagick-${version}.tar.gz http://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/${version}/GraphicsMagick-${version}.tar.gz/download
-           ls -l
-           tar xvfz GraphicsMagick-${version}.tar.gz
+           tar xfz GraphicsMagick-${version}.tar.gz
            cd GraphicsMagick-*
         #fi
         ;;
@@ -70,7 +69,6 @@ set +e
     --with-quantum-depth=16 \
     --enable-shared \
     --exec-prefix=/usr \
-    --prefix=/usr/lib \
     --disable-openmp \
     --with-perl=no \
     --without-threads \
