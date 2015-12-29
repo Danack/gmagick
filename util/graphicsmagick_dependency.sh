@@ -33,11 +33,11 @@ graphicsmagick_fetch_and_build () {
     case $version in
         dev)
             set -e
-            $hg_dir="${HOME}/gm/graphicsmagick-${version}"
-            
+            hg_dir="${HOME}/gm/graphicsmagick-${version}"
+
             mkdir -p "${hg_dir}"
             cd "${hg_dir}"
-            
+
             hg clone http://hg.code.sf.net/p/graphicsmagick/code GM
             cd GM
             hg pull
