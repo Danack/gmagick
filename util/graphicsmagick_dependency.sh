@@ -7,9 +7,10 @@ set -x
 
 graphicsmagick_fetch_and_build () {
     local version=$1
+    local quantum=$2
 
-    echo "version is ${version}"
-    gm_dir=${HOME}/gm/graphicsmagick-${version}
+    echo "version is ${version}, quantum depth is ${quantum}"
+    gm_dir=${HOME}/gm/graphicsmagick_${version}_${quantum}
 
 
 # Figure out if the version is already there.
@@ -33,7 +34,7 @@ graphicsmagick_fetch_and_build () {
     case $version in
         dev)
             set -e
-            hg_dir="${HOME}/gm/graphicsmagick-${version}"
+            hg_dir="${HOME}/gm/hg_${version}_${quantum}"
 
             mkdir -p "${hg_dir}"
             cd "${hg_dir}"
@@ -56,9 +57,9 @@ graphicsmagick_fetch_and_build () {
             # problems.
             #if [ "${start_str}" == "commit" ]; then
             #    sha=${version:7:47}
-            #    wget -O "ImageMagick-${sha}.tar.gz" "https://github.com/ImageMagick/ImageMagick/archive/${sha}.tar.gz"
-            #    tar xvfz ImageMagick-${sha}.tar.gz
-            #    cd "ImageMagick-${sha}"
+            #    wget -O "GraphicsMagick-${sha}.tar.gz" "https://github.com/ImageMagick/ImageMagick/archive/${sha}.tar.gz"
+            #    tar xvfz GraphicsMagick-${sha}.tar.gz
+            #    cd "GraphicsMagick-${sha}"
             #else
 
             wget -O GraphicsMagick-${version}.tar.gz http://sourceforge.net/projects/graphicsmagick/files/graphicsmagick/${version}/GraphicsMagick-${version}.tar.gz/download
@@ -75,10 +76,10 @@ graphicsmagick_fetch_and_build () {
     set +e
 
     ./configure \
-    --prefix="${HOME}/gm/graphicsmagick-${version}" \
-    --with-quantum-depth=16 \
+    --prefix="${HOME}/gm/graphicsmagick_${version}_${quantum}" \
+    --with-quantum-depth=${quantum} \
     --enable-shared \
-    --exec-prefix="${HOME}/gm/graphicsmagick-${version}" \
+    --exec-prefix="${HOME}/gm/graphicsmagick_${version}_${quantum}" \
     --disable-openmp \
     --with-perl=no \
     --without-threads \
@@ -89,4 +90,4 @@ graphicsmagick_fetch_and_build () {
     cd ..
 }
 
-graphicsmagick_fetch_and_build $1
+graphicsmagick_fetch_and_build $1 $2
