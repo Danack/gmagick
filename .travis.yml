@@ -4,7 +4,8 @@ sudo: false
 
 cache:
     directories:
-        - $HOME/gm
+        - $HOME/gm/dev
+        - $HOME/gm/build
 
 php:
     - 7.0
@@ -47,7 +48,7 @@ script:
     - export PHP_IMAGICK_VERSION=$(php -r '$sxe = simplexml_load_file ("package.xml"); echo (string) $sxe->version->release;')
     - . ./util/configure_cflags.sh
     - phpize
-    - ./configure --with-gmagick="${HOME}/gm/graphicsmagick_${GRAPHICSMAGICK_VERSION}_${QUANTUM}"
+    - ./configure --with-gmagick="${HOME}/gm/build/graphicsmagick_${GRAPHICSMAGICK_VERSION}_${QUANTUM}"
     - make
     - php run-tests.php -d extension=gmagick.so -d extension_dir=modules -n ./util/gmagick-check-loaded.phpt
     - php run-tests.php -d extension=gmagick.so -d extension_dir=modules -n ./tests/*.phpt

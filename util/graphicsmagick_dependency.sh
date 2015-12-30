@@ -10,10 +10,10 @@ graphicsmagick_fetch_and_build () {
     local quantum=$2
 
     echo "version is ${version}, quantum depth is ${quantum}"
-    gm_dir=${HOME}/gm/graphicsmagick_${version}_${quantum}
 
+    gm_dir="${HOME}/gm/build/graphicsmagick_${version}_${quantum}"
 
-# Figure out if the version is already there.
+    # Figure out if the version is already there.
     case $version in
 
         dev)
@@ -21,6 +21,7 @@ graphicsmagick_fetch_and_build () {
         ;;
 
         *)
+            
             # Both individual commits, and tagged versions are cacheable
             if [ -d "${gm_dir}" ]; then
                 echo "Using cached directory ${gm_dir}"
@@ -34,7 +35,7 @@ graphicsmagick_fetch_and_build () {
     case $version in
         dev)
             set -e
-            hg_dir="${HOME}/gm/hg_${version}_${quantum}"
+            hg_dir="${HOME}/gm/dev/hg_${version}_${quantum}"
 
             mkdir -p "${hg_dir}"
             cd "${hg_dir}"
@@ -78,10 +79,10 @@ graphicsmagick_fetch_and_build () {
     set +e
 
     ./configure \
-    --prefix="${HOME}/gm/graphicsmagick_${version}_${quantum}" \
+    --prefix="${gm_dir}" \
     --with-quantum-depth=${quantum} \
     --enable-shared \
-    --exec-prefix="${HOME}/gm/graphicsmagick_${version}_${quantum}" \
+    --exec-prefix="${gm_dir}" \
     --disable-openmp \
     --with-perl=no \
     --without-threads \
