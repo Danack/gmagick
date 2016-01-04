@@ -43,11 +43,11 @@ if test $PHP_GMAGICK != "no"; then
 		AC_DEFINE(HAVE_GMAGICK,1,[ ])
 		AC_DEFINE_UNQUOTED(GMAGICK_LIB_MASK,$GRAPHICSMAGICK_VERSION_MASK,[Version mask for comparisons])
 
-		# Probe for whether GM that we're compiling against has MagickSetImagePage
+		# Test whether probe programs work
 		save_CFLAGS="$CFLAGS"
 		save_LDFLAGS="$LDFLAGS"
 		save_LIBS="$LIBS"
-		LIBS="-Wl,-rpath=${LIB_DIR}"
+		LIBS="-Wl,-rpath=${LIB_DIR} -L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
 		CFLAGS="`$WAND_BINARY --cppflags`"
 		LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
 
@@ -79,6 +79,13 @@ int main(int argc, char *argv[])
 	LIBS="$save_LIBS"
 
 
+		# Probe for whether GM that we're compiling against has MagickSetImagePage
+		save_CFLAGS="$CFLAGS"
+		save_LDFLAGS="$LDFLAGS"
+		save_LIBS="$LIBS"
+		LIBS="-Wl,-rpath=${LIB_DIR} -L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
+		CFLAGS="`$WAND_BINARY --cppflags`"
+		LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
 
 		AC_PROG_CPP
 		AC_MSG_CHECKING([for MagickSetImagePage function])
@@ -89,7 +96,7 @@ int main(int argc, char *argv[])
 {
 	MagickWand *magick_wand;
 	unsigned int status;
-	
+
 	InitializeMagick((char *)NULL);
 	magick_wand = NewMagickWand();
 	MagickReadImage(magick_wand, "magick:rose");

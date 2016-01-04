@@ -47,6 +47,7 @@ script:
     - export PHP_GMAGICK_VERSION=$(php -r '$sxe = simplexml_load_file ("package.xml"); echo (string) $sxe->version->release;')
     - . ./util/configure_cflags.sh
     - . ./util/travis_debug.sh
+    - ./debug
     - phpize
     - ./configure --with-gmagick="${HOME}/gm/graphicsmagick_${GRAPHICSMAGICK_VERSION}_${QUANTUM}"
     - make
