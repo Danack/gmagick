@@ -50,6 +50,7 @@ script:
     - ./debug
     - phpize
     - ./configure --with-gmagick="${HOME}/gm/graphicsmagick_${GRAPHICSMAGICK_VERSION}_${QUANTUM}"
+    - cat ./config.log
     - make
     - php run-tests.php -d extension=gmagick.so -d extension_dir=modules -n ./util/gmagick-check-loaded.phpt
     - php run-tests.php -d extension=gmagick.so -d extension_dir=modules -n ./tests/*.phpt
