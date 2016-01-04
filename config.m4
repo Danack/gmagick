@@ -83,10 +83,10 @@ int main(int argc, char *argv[])
 		save_CFLAGS="$CFLAGS"
 		save_LDFLAGS="$LDFLAGS"
 		save_LIBS="$LIBS"
-		LIBS="-Wl,-rpath=${LIB_DIR} -L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
+		LIBS="-Wl,-rpath=${LIB_DIR}"
 		
 		CFLAGS="`$WAND_BINARY --cppflags`"
-		LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
+		LDFLAGS="-L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so `$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
 
 		
 
