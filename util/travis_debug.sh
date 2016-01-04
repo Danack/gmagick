@@ -9,7 +9,12 @@
 # export CFLAGS="-I/usr/local/include/GraphicsMagick"
 # export LDFLAGS="-L/usr/local/lib -lGraphicsMagick -lwebp -ltiff -lfreetype -ljasper -ljpeg -lpng12 -lXext -lSM -lICE -lX11 -lbz2 -lxml2 -lz -lm -lGraphicsMagickWand"
 
+set -e
+set -x
+
 WAND_BINARY="/home/travis/gm/graphicsmagick_1.3.23_16/bin/GraphicsMagick-config"
+
+WAND_BINARY="/usr/local/bin/GraphicsMagick-config"
 
 WAND_DIR=`$WAND_BINARY --prefix`
 LIB_DIR="${WAND_DIR}/lib"
@@ -22,7 +27,14 @@ echo "CFLAGS ${CFLAGS}"
 echo "LDFLAGS ${LDFLAGS}"
 echo "LIBS ${LIBS}"
 
-echo ""
-echo "Full compile line: cc "${CFLAGS}" debug.c -o debug "${LDFLAGS}" ${LIBS}"
+added_libs="-L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
 
-cc "${CFLAGS}" debug.c -o debug "${LDFLAGS}" ${LIBS}
+echo ""
+echo "Full compile line: cc "${CFLAGS}" debug.c -o debug ${added_libs} ${LDFLAGS}  ${LIBS} "
+
+
+cc $CFLAGS debug.c -o debug $added_libs $LDFLAGS $LIBS 
+
+
+
+
