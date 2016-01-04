@@ -48,7 +48,7 @@ if test $PHP_GMAGICK != "no"; then
 		save_CPPFLAGS="$CPPFLAGS"
 		save_LDFLAGS="$LDFLAGS"
 		save_LIBS="$LIBS"
-		LIBS="-Wl,-rpath=${LIB_DIR} -L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
+		LIBS="-L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so -Wl,-rpath=${LIB_DIR}"
 		
 		CPPFLAGS="`$WAND_BINARY --cppflags`"
 		LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
