@@ -5,7 +5,6 @@
 # export LDFLAGS="-L/home/travis/gm/graphicsmagick_1.3.22_8/lib -L/usr/lib/x86_64-linux-gnu -lGraphicsMagick -ltiff -lfreetype -ljasper -ljpeg -lpng12 -lwmflite -lXext -lSM -lICE -lX11 -lbz2 -lxml2 -lz -lm -lGraphicsMagickWand"
 
 
-
 # export LIBS="-Wl,-rpath=/usr/local/lib"
 # export CFLAGS="-I/usr/local/include/GraphicsMagick"
 # export LDFLAGS="-L/usr/local/lib -lGraphicsMagick -lwebp -ltiff -lfreetype -ljasper -ljpeg -lpng12 -lXext -lSM -lICE -lX11 -lbz2 -lxml2 -lz -lm -lGraphicsMagickWand"
@@ -19,7 +18,11 @@ LIBS="-Wl,-rpath=${LIB_DIR}"
 CFLAGS="`$WAND_BINARY --cppflags`"
 LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
 
+echo "CFLAGS ${CFLAGS}"
+echo "LDFLAGS ${LDFLAGS}"
+echo "LIBS ${LIBS}"
 
-
+echo ""
+echo "Full compile line: cc "${CFLAGS}" debug.c -o debug "${LDFLAGS}" ${LIBS}"
 
 cc "${CFLAGS}" debug.c -o debug "${LDFLAGS}" ${LIBS}
