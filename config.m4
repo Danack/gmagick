@@ -55,6 +55,7 @@ if test $PHP_GMAGICK != "no"; then
 
 		AC_MSG_NOTICE([Libs are $LIBS])
 		AC_MSG_NOTICE([CFLAGS are $CFLAGS])
+		AC_MSG_NOTICE([CPPFLAGS are $CPPFLAGS])
 		AC_MSG_NOTICE([LDFLAGS are $LDFLAGS])
 
 		AC_LANG_C
@@ -90,7 +91,15 @@ int main(int argc, char *argv[])
 		LIBS="-Wl,-rpath=${LIB_DIR}"
 		
 		CPPFLAGS="`$WAND_BINARY --cppflags`"
+		CXXFLAGS="`$WAND_BINARY --cppflags`"
+
 		LDFLAGS="-L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so `$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
+
+
+		AC_MSG_NOTICE([LIBS are $LIBS])
+		AC_MSG_NOTICE([CFLAGS are $CFLAGS])
+		AC_MSG_NOTICE([CPPFLAGS are $CPPFLAGS])
+		AC_MSG_NOTICE([LDFLAGS are $LDFLAGS])
 
 
 	# dnl CFLAGS or CXXFLAGS, CPPFLAGS, LDFLAGS, and LIBS when compiling
