@@ -83,15 +83,17 @@ int main(int argc, char *argv[])
 		save_CFLAGS="$CFLAGS"
 		save_LDFLAGS="$LDFLAGS"
 		save_LIBS="$LIBS"
-		#LIBS="-Wl,-rpath=${LIB_DIR} -L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
-		LIBS="-Wl,-rpath=${LIB_DIR} "
+		LIBS="-Wl,-rpath=${LIB_DIR} -L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
+		
 		CFLAGS="`$WAND_BINARY --cppflags`"
 		LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
 
 		
 
 
-# dnl CFLAGS or CXXFLAGS, CPPFLAGS, LDFLAGS, and LIBS when compiling
+	# dnl CFLAGS or CXXFLAGS, CPPFLAGS, LDFLAGS, and LIBS when compiling
+
+
 	AC_LANG_C
 	AC_PROG_CC
 		AC_MSG_CHECKING([for MagickSetImagePage function compilation and running])
