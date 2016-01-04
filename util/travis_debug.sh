@@ -10,7 +10,7 @@
 # export CFLAGS="-I/usr/local/include/GraphicsMagick"
 # export LDFLAGS="-L/usr/local/lib -lGraphicsMagick -lwebp -ltiff -lfreetype -ljasper -ljpeg -lpng12 -lXext -lSM -lICE -lX11 -lbz2 -lxml2 -lz -lm -lGraphicsMagickWand"
 
-$WAND_BINARY="/home/travis/gm/graphicsmagick_1.3.23_16/bin/GraphicsMagick-config"
+WAND_BINARY="/home/travis/gm/graphicsmagick_1.3.23_16/bin/GraphicsMagick-config"
 
 WAND_DIR=`$WAND_BINARY --prefix`
 LIB_DIR="${WAND_DIR}/lib"
