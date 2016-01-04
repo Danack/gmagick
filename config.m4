@@ -51,6 +51,35 @@ if test $PHP_GMAGICK != "no"; then
 		CFLAGS="`$WAND_BINARY --cppflags`"
 		LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
 
+		AC_MSG_NOTICE([Libs are $LIBS])
+		AC_MSG_NOTICE([CFLAGS are $CFLAGS])
+		AC_MSG_NOTICE([LDFLAGS are $LDFLAGS])
+
+		AC_PROG_CPP
+		AC_MSG_CHECKING([for basic compilation])
+		AC_TRY_RUN([
+#include <wand/wand_api.h>
+
+int main(int argc, char *argv[])
+{
+	return 0;
+}
+		],[
+		  AC_MSG_RESULT([yes])
+		  AC_MSG_NOTICE([Probing GraphicsMagick functions is working])
+		], [
+		  AC_MSG_RESULT([no])
+		  AC_MSG_ERROR([Probing GraphicsMagick functions is not working cannot compile safely])
+		], [
+		  AC_MSG_RESULT([no])
+		])
+
+	CFLAGS="$save_CFLAGS"
+	LDFLAGS="$save_LDFLAGS"
+	LIBS="$save_LIBS"
+
+
+
 		AC_PROG_CPP
 		AC_MSG_CHECKING([for MagickSetImagePage function])
 		AC_TRY_RUN([
@@ -81,4 +110,5 @@ int main(int argc, char *argv[])
 	CFLAGS="$save_CFLAGS"
 	LDFLAGS="$save_LDFLAGS"
 	LIBS="$save_LIBS"
+
 fi
