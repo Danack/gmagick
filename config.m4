@@ -81,14 +81,13 @@ int main(int argc, char *argv[])
 
 		# Probe for whether GM that we're compiling against has MagickSetImagePage
 		save_CFLAGS="$CFLAGS"
+		save_CPPFLAGS="$CPPFLAGS"
 		save_LDFLAGS="$LDFLAGS"
 		save_LIBS="$LIBS"
 		LIBS="-Wl,-rpath=${LIB_DIR}"
 		
-		CFLAGS="`$WAND_BINARY --cppflags`"
+		CPPFLAGS="`$WAND_BINARY --cppflags`"
 		LDFLAGS="-L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so `$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
-
-		
 
 
 	# dnl CFLAGS or CXXFLAGS, CPPFLAGS, LDFLAGS, and LIBS when compiling
@@ -124,6 +123,7 @@ int main(int argc, char *argv[])
 		])
 
 	CFLAGS="$save_CFLAGS"
+	CPPFLAGS="$save_CPPFLAGS"
 	LDFLAGS="$save_LDFLAGS"
 	LIBS="$save_LIBS"
 
