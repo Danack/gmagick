@@ -45,10 +45,12 @@ if test $PHP_GMAGICK != "no"; then
 
 		# Test whether probe programs work
 		save_CFLAGS="$CFLAGS"
+		save_CPPFLAGS="$CPPFLAGS"
 		save_LDFLAGS="$LDFLAGS"
 		save_LIBS="$LIBS"
 		LIBS="-Wl,-rpath=${LIB_DIR} -L${LIB_DIR}/libGraphicsMagickWand.so -L${LIB_DIR}/libGraphicsMagick.so"
-		CFLAGS="`$WAND_BINARY --cppflags`"
+		
+		CPPFLAGS="`$WAND_BINARY --cppflags`"
 		LDFLAGS="`$WAND_BINARY --ldflags` `$WAND_BINARY --libs` -lGraphicsMagickWand"
 
 		AC_MSG_NOTICE([Libs are $LIBS])
@@ -75,6 +77,7 @@ int main(int argc, char *argv[])
 		])
 
 	CFLAGS="$save_CFLAGS"
+	CPPFLAGS="$save_CPPFLAGS"
 	LDFLAGS="$save_LDFLAGS"
 	LIBS="$save_LIBS"
 
@@ -93,8 +96,8 @@ int main(int argc, char *argv[])
 	# dnl CFLAGS or CXXFLAGS, CPPFLAGS, LDFLAGS, and LIBS when compiling
 
 
-	AC_LANG_C
-	AC_PROG_CC
+	
+		AC_PROG_CPP
 		AC_MSG_CHECKING([for MagickSetImagePage function compilation and running])
 		AC_TRY_RUN([
 
