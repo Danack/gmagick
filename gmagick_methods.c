@@ -448,6 +448,8 @@ PHP_METHOD(gmagick, addimage)
 	php_gmagick_object *intern, *intern_add;
 	zval *add_obj;
 	MagickBool status;
+	unsigned long number_of_images;
+	MagickWand *tmp_wand;
 
 	/* Parse parameters given to function */
 	if (zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC, "O", &add_obj, php_gmagick_sc_entry) == FAILURE) {
@@ -458,6 +460,28 @@ PHP_METHOD(gmagick, addimage)
 	intern_add = Z_GMAGICK_OBJ_P(add_obj);
 
 	GMAGICK_CHECK_NOT_EMPTY(intern_add->magick_wand, 1, 1);
+
+	number_of_images = MagickGetNumberImages(intern->magick_wand);
+	if (number_of_images == 0) {
+		//Inserting images into empty wands fails completely. Clone
+		//the wand that is going to be added instead.
+		tmp_wand = CloneMagickWand(intern_add->magick_wand);
+		if (tmp_wand == (MagickWand *)NULL) {
+			GMAGICK_THROW_GMAGICK_EXCEPTION(intern->magick_wand, "Clone image failed");
+		}
+
+		GMAGICK_REPLACE_MAGICKWAND(intern, tmp_wand);
+		GMAGICK_CHAIN_METHOD;
+	}
+	else if (number_of_images == 1) {
+		//Inserting images into wands with one image does not behave correctly
+		//This hack apparently gives the correct behaviour
+		status = MagickSetImageIndex(intern->magick_wand, 0);
+		if (status == MagickFalse) {
+			GMAGICK_THROW_GMAGICK_EXCEPTION(intern->magick_wand, "Internal error in addImage");
+		}
+		MagickNextImage(intern->magick_wand);
+	}
 
 	status = MagickAddImage(intern->magick_wand, intern_add->magick_wand);
 
@@ -680,7 +704,7 @@ PHP_METHOD(gmagick, cyclecolormapimage)
 }
 /* }}} */
 
-/* {{{ proto bool Gmagick::deconstructImages()
+/* {{{ proto Gmagick Gmagick::deconstructImages()
 	Compares each image with the next in a sequence and returns the maximum bounding region of any pixel differences it discovers.
 */
 PHP_METHOD(gmagick, deconstructimages)
@@ -702,7 +726,7 @@ PHP_METHOD(gmagick, deconstructimages)
 	}
 
 	object_init_ex(return_value, php_gmagick_sc_entry);
-	intern = Z_GMAGICK_OBJ_P(return_value);
+	intern_return = Z_GMAGICK_OBJ_P(return_value);
 	GMAGICK_REPLACE_MAGICKWAND(intern_return, tmp_wand);
 
 	return;
