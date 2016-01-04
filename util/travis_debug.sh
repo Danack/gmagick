@@ -14,7 +14,7 @@ set -x
 
 WAND_BINARY="/home/travis/gm/graphicsmagick_1.3.23_16/bin/GraphicsMagick-config"
 
-WAND_BINARY="/usr/local/bin/GraphicsMagick-config"
+# WAND_BINARY="/usr/local/bin/GraphicsMagick-config"
 
 WAND_DIR=`$WAND_BINARY --prefix`
 LIB_DIR="${WAND_DIR}/lib"
